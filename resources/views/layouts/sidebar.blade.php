@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ url('/dashboard') }}" class="brand-link">
         <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Iventory</span>
     </a>
 
     <!-- Sidebar -->
@@ -19,20 +19,24 @@
             </div>
         </div>
 
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ url('/dashboard') }}"
+                        class="nav-link {{ $active == 'menu-dashboard' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li
+                    class="nav-item {{ $active == 'menu-kategori' || $active == 'menu-barang' ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ $active == 'menu-kategori' || $active == 'menu-barang' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cube"></i>
                         <p>
                             Master Data Barang
@@ -41,13 +45,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('dashboard.kategori') }}"
+                                class="nav-link {{ $active == 'menu-kategori' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('dashboard.barang') }}"
+                                class="nav-link {{ $active == 'menu-barang' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Barang</p>
                             </a>
@@ -55,7 +61,46 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboard.pabrik') }}"
+                        class="nav-link {{ $active == 'menu-pabrik' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-industry"></i>
+                        <p>
+                            Data Pabrik
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">PENGATURAN</li>
+                <li
+                    class="nav-item {{ $active == 'menu-user' || $active == 'menu-role' ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ $active == 'menu-user' || $active == 'menu-role' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Manajemen User
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.user.index') }}"
+                                class="nav-link {{ $active == 'menu-user' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.role') }}"
+                                class="nav-link {{ $active == 'menu-role' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Role</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item {{ $active == 'menu-laporan-perhari' || $active == 'menu-laporan-perbulan' ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ $active == 'menu-laporan-perhari' || $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Laporan
@@ -64,13 +109,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('dashboard.laporan-perhari') }}"
+                                class="nav-link {{ $active == 'menu-laporan-perhari' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perhari</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('dashboard.laporan-perbulan') }}"
+                                class="nav-link {{ $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perbulan</p>
                             </a>
@@ -78,16 +125,18 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-industry"></i>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
-                            data Pabrik
+                            Logout
                         </p>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>
