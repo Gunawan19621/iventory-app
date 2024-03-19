@@ -45,14 +45,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.kategori') }}"
+                            <a href="{{ route('dashboard.kategori.index') }}"
                                 class="nav-link {{ $active == 'menu-kategori' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.barang') }}"
+                            <a href="{{ route('dashboard.barang.index') }}"
                                 class="nav-link {{ $active == 'menu-barang' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Barang</p>
@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.pabrik') }}"
+                    <a href="{{ route('dashboard.pabrik.index') }}"
                         class="nav-link {{ $active == 'menu-pabrik' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.role') }}"
+                            <a href="{{ route('dashboard.role.index') }}"
                                 class="nav-link {{ $active == 'menu-role' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Role</p>

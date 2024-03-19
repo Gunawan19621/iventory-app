@@ -1,0 +1,76 @@
+@extends('layouts.master')
+
+@section('title')
+    Edit Role
+@endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item">Manajemen User</li>
+    <li class="breadcrumb-item">Role</li>
+    <li class="breadcrumb-item active">Edit Role</li>
+@endsection
+
+@section('content')
+    @include('layouts.alert')
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Role</h3>
+                        </div>
+                        <!-- form update -->
+                        <form action="{{ route('dashboard.role.update', [$role->id]) }}" method="POST"
+                            enctype="multipart/form-data" id="editForm">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">Nama Role <span class="text-danger">*</span></label>
+                                    <input type="name" name="name" class="form-control" id="name"
+                                        placeholder="Enter Nama Role" value="{{ $role->name }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Deskripsi Role <span class="text-danger">*</span></label>
+                                    <textarea name="description" class="form-control" rows="3" id="description" placeholder="Enter deskripsi"
+                                        required>{{ $role->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+@push('scripts')
+    <!-- Show Password -->
+    <script>
+        const passwordInput = document.getElementById("password");
+        const showPasswordButton = document.getElementById("showPasswordButton");
+
+        showPasswordButton.addEventListener("click", function() {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                showPasswordButton.textContent = "Sembunyikan";
+            } else {
+                passwordInput.type = "password";
+                showPasswordButton.textContent = "Tampilkan";
+            }
+        });
+    </script>
+
+    <!-- Disable submit pada saat kliknya doubel -->
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function() {
+            document.getElementById('submitButton').setAttribute('disabled', 'true');
+        });
+    </script>
+@endpush

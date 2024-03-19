@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah User
+    Edit User
 @endsection
 
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item">Manajemen User</li>
     <li class="breadcrumb-item">User</li>
-    <li class="breadcrumb-item active">Tambah User</li>
+    <li class="breadcrumb-item active">Edit User</li>
 @endsection
 
 @section('content')
@@ -20,35 +20,39 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah User</h3>
+                            <h3 class="card-title">Edit User</h3>
                         </div>
-                        <!-- form store -->
-                        <form action="{{ route('dashboard.user.store') }}" method="POST" enctype="multipart/form-data"
-                            id="userForm">
+                        <!-- form update -->
+                        <form action="{{ route('dashboard.user.update', [$user->id]) }}" method="POST"
+                            enctype="multipart/form-data" id="editForm">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Nama <span class="text-danger">*</span></label>
                                     <input type="name" name="name" class="form-control" id="name"
-                                        placeholder="Enter Nama" required>
+                                        value="{{ $user->name }}" placeholder="Enter Nama" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="id_role">Role</label>
                                     <select class="form-control" name="id_role" id="id_role" required>
                                         <option disabled selected>Select Hak Akses User</option>
-                                        @foreach ($role as $dt_role)
-                                            <option value="{{ $dt_role->id }}">{{ $dt_role->name }}</option>
+                                        @foreach ($role as $data)
+                                            <option value="{{ $data->id }}"
+                                                @if ($data->id == $user->id_role) selected
+                                        @else @endif>
+                                                {{ $data->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <textarea name="alamat" class="form-control" rows="3" id="alamat" placeholder="Enter Alamat"></textarea>
+                                    <textarea name="alamat" class="form-control" rows="3" id="alamat" placeholder="Enter Alamat">{{ $user->alamat }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email <span class="text-danger">*</span></label>
                                     <input type="email" name="email" class="form-control" id="email"
-                                        placeholder="Enter Email" required>
+                                        placeholder="Enter Email" value="{{ $user->email }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password: <span class="text-danger">*</span></label>

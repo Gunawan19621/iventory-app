@@ -23,8 +23,10 @@ class BarangSeeder extends Seeder
         foreach ($kategoris as $kategori) {
             // Menghasilkan 5 barang untuk setiap kategori
             for ($i = 1; $i <= 1; $i++) {
+                // Menghasilkan kode barang unik dengan pola 'BRGXXXX' di mana 'XXXX' adalah nomor urut dengan padding ke 4 digit
+                $kode_barang = 'BRG' . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
                 $barangs[] = [
-                    'kode_barang' => 'BRG_' . $kategori . '_' . $i,
+                    'kode_barang' => $kode_barang,
                     'nama_barang' => 'Barang ' . $kategori . ' ' . $i,
                     'kode_kategori' => $kategori,
                     'foto_barang' => null, // Isi dengan URL foto jika ada

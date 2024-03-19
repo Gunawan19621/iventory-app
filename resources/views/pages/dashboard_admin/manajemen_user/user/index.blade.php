@@ -15,6 +15,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    @include('layouts.alert')
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-end">
@@ -23,7 +24,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-stiped table-bordered">
+                            <table class="table table-stiped table-bordered" id="user-table">
                                 <thead>
                                     <tr>
                                         <th width="5%">No</th>
@@ -50,10 +51,12 @@
 
 @push('scripts')
     <script>
-        let table;
+        // Memuat jQuery dalam mode noConflict
+        var $j = jQuery.noConflict();
 
-        $(function() {
-            table = $('.table').DataTable({
+        // Menggunakan $j untuk menghindari bentrok
+        $j(function() {
+            var table = $j('#user-table').DataTable({
                 responsive: true,
                 processing: true,
                 serverSide: true,
@@ -85,6 +88,6 @@
                     },
                 ]
             });
-        })
+        });
     </script>
 @endpush
