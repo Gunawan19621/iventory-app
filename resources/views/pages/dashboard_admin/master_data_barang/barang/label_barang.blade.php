@@ -57,27 +57,26 @@
     <table style="width:100%; margin-top: 10px;" class="table table-bordered">
         <tr>
             <td rowspan="2">
-                <img src="data:image/jpeg;base64,<?= base64_encode(file_get_contents('assets/img/istw_black&white.jpg')) ?>"
-                    alt="Logo ISTW" class="logo">
+                <img src="{{ asset('assets/img/logo_samara.png') }}" alt="Logo ISTW" class="logo">
             </td>
-            <td>PETI NUMBER</td>
+            <td>Kode Barang</td>
             <td>BARCODE</td>
         </tr>
         <tr>
             <td>
-                {{ $peti->fix_lot }}
+                {{ $barang->kode_barang }}
             </td>
             <td rowspan="4">
                 <img src="data:image/svg+xml;base64,{{ $qrcode }}" alt="QR Code" class="qrcode">
             </td>
         </tr>
         <tr>
-            <td>PT. ISTW</td>
+            <td>PT. Samara</td>
             <td>CUSTOMER</td>
         </tr>
         <tr>
             <td>QTY PETI</td>
-            <td rowspan="2">PT. {{ $peti->customer->name }}</td>
+            <td rowspan="2">PT. {{ $barang->nama_barang }}</td>
         </tr>
         <tr>
             <td>1</td>

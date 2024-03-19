@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Requests\barang\ValidasiCreateBarang;
-use PDF;
 
 class BarangController extends Controller
 {
@@ -178,7 +181,58 @@ class BarangController extends Controller
     public function cetakPdf($id)
     {
         $barang = Barang::findOrFail($id);
-        $pdf = PDF::loadView('pages.dashboard_admin.master_data_barang.barang.label_barang', compact('barang'));
+        // Generate QR Code
+        $qrcode = base64_encode(QrCode::format('svg')->size(150)->generate(
+            $barang->kode_barang
+        ));
+
+        // // Inisialisasi Dompdf
+        // $options = new Options();
+        // $options->set('isHtml5ParserEnabled', true);
+        // $options->set('isRemoteEnabled', true);
+        // $options->set('defaultFont', 'Arial');
+        // $dompdf = new Dompdf($options);
+
+        $pdf = PDF::loadView('pages.dashboard_admin.master_data_barang.barang.label_barang', compact('barang', 'qrcode'));
         return $pdf->stream('barang.pdf');
+
+        // try {
+        //     $barang = Barang::findOrFail($id);
+
+        //     // Generate QR Code
+        //     $qrcode = base64_encode(QrCode::format('svg')->size(150)->generate(
+        //         $barang->kode_barang
+        //     ));
+
+        //     // Inisialisasi Dompdf
+        //     $options = new Options();
+        //     $options->set('isHtml5ParserEnabled', true);
+        //     $options->set('isRemoteEnabled', true);
+        //     $options->set('defaultFont', 'Arial');
+        //     $dompdf = new Dompdf($options);
+
+        //     // Load HTML dari view
+        //     $html = view('pages.dashboard_admin.master_data_barang.barang.label_barang', compact('barang', 'qrcode'))->render();
+        //     $dompdf->loadHtml($html);
+
+        //     // Render PDF (portrait A4)
+        //     $dompdf->setPaper('A4', 'portrait');
+        //     $dompdf->render();
+        //     $output = $dompdf->output();
+
+        //     // Download file PDF dengan nama yang sesuai
+        //     return response()->stream(
+        //         function () use ($output) {
+        //             echo $output;
+        //         },
+        //         200,
+        //         [
+        //             'Content-Type' => 'application/pdf',
+        //             'Content-Disposition' => 'inline; filename="Barang.pdf"',
+        //         ]
+        //     );
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', 'Terjadi kesalahan saat mencetak PDF.');
+        // }
     }
 }

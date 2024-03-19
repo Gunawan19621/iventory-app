@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PabrikController;
 use App\Http\Controllers\ProfileController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanPerhariController;
 use App\Http\Controllers\LaporanPerbulanController;
@@ -107,4 +108,9 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
     Route::get('/laporan-perbulan', [LaporanPerbulanController::class, 'index'])->name('laporan-perbulan');
 });
 
+
+// Route::get('qrcode', function () {
+
+//     return QrCode::size(300)->generate('A basic example of QR code!');
+// });
 require __DIR__ . '/auth.php';
