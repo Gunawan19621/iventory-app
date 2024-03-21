@@ -109,14 +109,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.laporan-perhari') }}"
+                            <a href="{{ route('dashboard.laporan-perhari.index') }}"
                                 class="nav-link {{ $active == 'menu-laporan-perhari' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perhari</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.laporan-perbulan') }}"
+                            <a href="{{ route('dashboard.laporan-perbulan.index') }}"
                                 class="nav-link {{ $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perbulan</p>

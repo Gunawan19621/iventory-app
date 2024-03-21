@@ -63,21 +63,6 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::get('/barang/data', 'data')->name('barang.data');
         Route::get('barangcetak_pdf/{id}', 'cetakPdf')->name('barangcetakpdf.cetakpdf');
     });
-    // Route::get('/barang', [BarangController::class, 'index'])->name('barang');
-    //Halaman Peti
-    // Route::controller(PetiController::class)->group(function () {
-    //     Route::get('peti', 'index')->name('peti.index');
-    //     Route::get('peti/create', 'create')->name('peti.create');
-    //     Route::post('peti/store', 'store')->name('peti.store');
-    //     Route::get('peti/{id}', 'show')->name('peti.show');
-    //     Route::get('peti/{id}/edit', 'edit')->name('peti.edit');
-    //     Route::put('peti/{id}', 'update')->name('peti.update');
-    //     Route::delete('peti/delete/{id}', 'destroy')->name('peti.destroy');
-    //     Route::get('peticetak_pdf/{id}', 'cetakPdf')->name('peticetakpdf.cetakpdf');
-    //     Route::get('all-cetak/peti', 'AllPdf')->name('all-pdf.cetakpdf');
-    //     Route::post('peti/import', 'importPeti')->name('peti.import');
-    //     Route::post('peti/delete-selected', 'deleteSelected')->name('peti.delete-selected');
-    // });
 
     // Route User
     Route::controller(UserController::class)->group(function () {
@@ -103,9 +88,29 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::get('/role/data', 'data')->name('role.data');
     });
 
-    // Route Laporan
-    Route::get('/laporan-perhari', [LaporanPerhariController::class, 'index'])->name('laporan-perhari');
-    Route::get('/laporan-perbulan', [LaporanPerbulanController::class, 'index'])->name('laporan-perbulan');
+    // Route Laporan Perhari
+    Route::controller(LaporanPerhariController::class)->group(function () {
+        Route::get('laporan-perhari', 'index')->name('laporan-perhari.index');
+        // Route::get('laporan-perhari/create', 'create')->name('laporan-perhari.create');
+        // Route::post('laporan-perhari/store', 'store')->name('laporan-perhari.store');
+        // Route::get('laporan-perhari/{id}', 'show')->name('laporan-perhari.show');
+        // Route::get('laporan-perhari/{id}/edit', 'edit')->name('laporan-perhari.edit');
+        // Route::put('laporan-perhari/{id}', 'update')->name('laporan-perhari.update');
+        // Route::delete('laporan-perhari/delete/{id}', 'destroy')->name('laporan-perhari.destroy');
+    });
+
+    // Route Laporan Perbulan
+    Route::controller(LaporanPerbulanController::class)->group(function () {
+        Route::get('laporan-perbulan', 'index')->name('laporan-perbulan.index');
+        // Route::get('laporan-perbulan/create', 'create')->name('laporan-perbulan.create');
+        // Route::post('laporan-perbulan/store', 'store')->name('laporan-perbulan.store');
+        // Route::get('laporan-perbulan/{id}', 'show')->name('laporan-perbulan.show');
+        // Route::get('laporan-perbulan/{id}/edit', 'edit')->name('laporan-perbulan.edit');
+        // Route::put('laporan-perbulan/{id}', 'update')->name('laporan-perbulan.update');
+        // Route::delete('laporan-perbulan/delete/{id}', 'destroy')->name('laporan-perbulan.destroy');
+    });
+
+    // Route::get('/laporan-perbulan', [LaporanPerbulanController::class, 'index'])->name('laporan-perbulan');
 });
 
 

@@ -34,6 +34,11 @@
                                         placeholder="Enter Nama Barang" value="{{ $barang->nama_barang }}" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="kode_barang">Kode Barang <span class="text-danger">*</span></label>
+                                    <input type="kode_barang" name="kode_barang" class="form-control" id="kode_barang"
+                                        placeholder="Enter Kode Barang" value="{{ $barang->kode_barang }}" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="kode_kategori">Kategori <span class="text-danger">*</span></label>
                                     <select class="form-control" name="kode_kategori" id="kode_kategori" required>
                                         <option disabled selected>Select Kategori</option>

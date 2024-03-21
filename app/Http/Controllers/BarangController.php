@@ -107,6 +107,7 @@ class BarangController extends Controller
 
             $validatedData = $request->validate([
                 'nama_barang' => 'required',
+                'kode_barang' => 'required',
                 'kode_kategori' => 'required',
                 'foto_barang' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi jenis file gambar
             ]);
@@ -159,7 +160,7 @@ class BarangController extends Controller
             ->of($barang)
             ->addIndexColumn()
             ->addColumn('foto_barang', function ($barang) {
-                return '<img src="' . asset('storage/' . $barang->foto_barang) . '" alt="' . $barang->nama_barang . '" width="100">';
+                return '<img src="' . asset('storage/' . $barang->foto_barang) . '" alt="' . $barang->nama_barang . '" style="width: 70px; height: 70px;">';
             })
             ->addColumn('aksi', function ($barang) {
                 return '
@@ -186,53 +187,7 @@ class BarangController extends Controller
             $barang->kode_barang
         ));
 
-        // // Inisialisasi Dompdf
-        // $options = new Options();
-        // $options->set('isHtml5ParserEnabled', true);
-        // $options->set('isRemoteEnabled', true);
-        // $options->set('defaultFont', 'Arial');
-        // $dompdf = new Dompdf($options);
-
         $pdf = PDF::loadView('pages.dashboard_admin.master_data_barang.barang.label_barang', compact('barang', 'qrcode'));
         return $pdf->stream('barang.pdf');
-
-        // try {
-        //     $barang = Barang::findOrFail($id);
-
-        //     // Generate QR Code
-        //     $qrcode = base64_encode(QrCode::format('svg')->size(150)->generate(
-        //         $barang->kode_barang
-        //     ));
-
-        //     // Inisialisasi Dompdf
-        //     $options = new Options();
-        //     $options->set('isHtml5ParserEnabled', true);
-        //     $options->set('isRemoteEnabled', true);
-        //     $options->set('defaultFont', 'Arial');
-        //     $dompdf = new Dompdf($options);
-
-        //     // Load HTML dari view
-        //     $html = view('pages.dashboard_admin.master_data_barang.barang.label_barang', compact('barang', 'qrcode'))->render();
-        //     $dompdf->loadHtml($html);
-
-        //     // Render PDF (portrait A4)
-        //     $dompdf->setPaper('A4', 'portrait');
-        //     $dompdf->render();
-        //     $output = $dompdf->output();
-
-        //     // Download file PDF dengan nama yang sesuai
-        //     return response()->stream(
-        //         function () use ($output) {
-        //             echo $output;
-        //         },
-        //         200,
-        //         [
-        //             'Content-Type' => 'application/pdf',
-        //             'Content-Disposition' => 'inline; filename="Barang.pdf"',
-        //         ]
-        //     );
-        // } catch (\Exception $e) {
-        //     return redirect()->back()->with('error', 'Terjadi kesalahan saat mencetak PDF.');
-        // }
     }
 }
