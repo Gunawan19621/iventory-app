@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('surat_jalans', function (Blueprint $table) {
             $table->id();
+            
+            $table->uuid('mobile_id_sj')->nullable();
+
             $table->string('surat_jalan');
             $table->date('tgl_sj');
             $table->foreignId('id_pabrik')->constrained('pabriks')->onDelete('cascade');
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
