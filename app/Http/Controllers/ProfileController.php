@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -16,9 +20,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        $data = [
             'user' => $request->user(),
-        ]);
+            // 'profile' => User::get(),
+        ];
+        return view('profile.profile', $data);
     }
 
     /**
@@ -26,15 +32,39 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        try {
+            $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            $user->fill($request->validated());
+
+            // Handle foto upload if provided
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto')->storeAs('public/profile_foto', $request->user()->id . '.' . $request->file('foto')->extension());
+                $user->foto = str_replace('public/', '', $foto);
+            }
+
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
+
+            $user->save();
+
+            return redirect()->route('profile.edit')->with('success', 'Profile berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('profile.edit')
+                ->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
         }
+    }
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // Halaman Ganti Password
+    public function changePassword(Request $request): View
+    {
+        $data = [
+            'user' => $request->user(),
+            // 'profile' => User::get(),
+        ];
+        return view('profile.edit_password', $data);
     }
 
     /**

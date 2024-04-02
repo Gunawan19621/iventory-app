@@ -7,7 +7,9 @@
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item">Master Data Barang</li>
-    <li class="breadcrumb-item">Kategori</li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.kategori.index') }}" style="color: black;">Kategori</a>
+    </li>
     <li class="breadcrumb-item active">Edit Kategori</li>
 @endsection
 
@@ -34,8 +36,9 @@
                                         placeholder="Enter Nama Katagori" value="{{ $kategori->nama_kategori }}" required>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+                                <a href="{{ route('dashboard.kategori.index') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </form>
                     </div>

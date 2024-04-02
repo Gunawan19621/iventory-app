@@ -7,7 +7,9 @@
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item">Manajemen User</li>
-    <li class="breadcrumb-item">User</li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.user.index') }}" style="color: black;">User</a>
+    </li>
     <li class="breadcrumb-item active">Tambah User</li>
 @endsection
 
@@ -65,8 +67,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+                                <a href="{{ route('dashboard.user.index') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </form>
                     </div>

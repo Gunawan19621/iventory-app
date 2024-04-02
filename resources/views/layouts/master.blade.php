@@ -119,7 +119,7 @@
     <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script> <!-- penyebab eror sidebar --> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    {{-- <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script> --}}
+    <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
     <!-- bs-custom-file-input -->
     <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     @stack('scripts')

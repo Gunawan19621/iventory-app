@@ -15,7 +15,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="{{ route('profile.edit') }}" class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
@@ -26,7 +26,7 @@
                 data-accordion="false">
                 <li class="nav-item">
                     <a href="{{ url('/dashboard') }}"
-                        class="nav-link {{ $active == 'menu-dashboard' ? 'active' : '' }}">
+                        class="nav-link {{ isset($active) && $active == 'menu-dashboard' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -34,9 +34,9 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item {{ $active == 'menu-kategori' || $active == 'menu-barang' ? 'menu-is-opening menu-open' : '' }}">
+                    class="nav-item {{ (isset($active) && $active == 'menu-kategori') || (isset($active) && $active == 'menu-barang') ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#"
-                        class="nav-link {{ $active == 'menu-kategori' || $active == 'menu-barang' ? 'active' : '' }}">
+                        class="nav-link {{ (isset($active) && $active == 'menu-kategori') || (isset($active) && $active == 'menu-barang') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cube"></i>
                         <p>
                             Master Data Barang
@@ -46,14 +46,14 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('dashboard.kategori.index') }}"
-                                class="nav-link {{ $active == 'menu-kategori' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-kategori' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('dashboard.barang.index') }}"
-                                class="nav-link {{ $active == 'menu-barang' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-barang' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Barang</p>
                             </a>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('dashboard.pabrik.index') }}"
-                        class="nav-link {{ $active == 'menu-pabrik' ? 'active' : '' }}">
+                        class="nav-link {{ isset($active) && $active == 'menu-pabrik' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>
                             Data Pabrik
@@ -71,9 +71,9 @@
                 </li>
                 <li class="nav-header">PENGATURAN</li>
                 <li
-                    class="nav-item {{ $active == 'menu-user' || $active == 'menu-role' ? 'menu-is-opening menu-open' : '' }}">
+                    class="nav-item {{ (isset($active) && $active == 'menu-user') || (isset($active) && $active == 'menu-role') ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#"
-                        class="nav-link {{ $active == 'menu-user' || $active == 'menu-role' ? 'active' : '' }}">
+                        class="nav-link {{ (isset($active) && $active == 'menu-user') || (isset($active) && $active == 'menu-role') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Manajemen User
@@ -83,14 +83,14 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('dashboard.user.index') }}"
-                                class="nav-link {{ $active == 'menu-user' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-user' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('dashboard.role.index') }}"
-                                class="nav-link {{ $active == 'menu-role' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-role' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Role</p>
                             </a>
@@ -98,9 +98,9 @@
                     </ul>
                 </li>
                 <li
-                    class="nav-item {{ $active == 'menu-laporan-perhari' || $active == 'menu-laporan-perbulan' ? 'menu-is-opening menu-open' : '' }}">
+                    class="nav-item {{ (isset($active) && $active == 'menu-laporan-perhari') || (isset($active) && $active == 'menu-laporan-perbulan') ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#"
-                        class="nav-link {{ $active == 'menu-laporan-perhari' || $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
+                        class="nav-link {{ (isset($active) && $active == 'menu-laporan-perhari') || (isset($active) && $active == 'menu-laporan-perbulan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Laporan
@@ -110,14 +110,14 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('dashboard.laporan-perhari.index') }}"
-                                class="nav-link {{ $active == 'menu-laporan-perhari' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-laporan-perhari' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perhari</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('dashboard.laporan-perbulan.index') }}"
-                                class="nav-link {{ $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
+                                class="nav-link {{ isset($active) && $active == 'menu-laporan-perbulan' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Perbulan</p>
                             </a>

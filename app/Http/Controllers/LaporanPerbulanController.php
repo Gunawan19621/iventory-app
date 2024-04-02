@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Pabrik;
+use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 
 class LaporanPerbulanController extends Controller
@@ -63,5 +66,40 @@ class LaporanPerbulanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // Get datatable data Surat Jalan
+    public function data(Request $request)
+    {
+        // Mengambil tanggal awal dan akhir dari request
+        $dateStart = $request->date_start;
+        $dateEnd = $request->date_end;
+
+        // Inisialisasi query untuk data Surat Jalan
+        $query = SuratJalan::orderBy('id', 'desc');
+
+        // Jika terdapat filter tanggal awal dan akhir, tambahkan kondisi ke query
+        if ($dateStart && $dateEnd) {
+            $query->whereBetween('tgl_sj', [$dateStart, $dateEnd]);
+        }
+
+        // Eksekusi query untuk mendapatkan data Surat Jalan
+        $suratJalan = $query->get();
+
+        // Format data dan kirim ke DataTables
+        return datatables()
+            ->of($suratJalan)
+            ->addIndexColumn()
+            ->addColumn('tgl_sj', function ($suratJalan) {
+                return date('d-m-Y', strtotime($suratJalan->tgl_sj));
+            })
+            ->addColumn('id_pabrik', function ($suratJalan) {
+                return $suratJalan->pabrik->nama_pabrik;
+            })
+            ->addColumn('id_user', function ($suratJalan) {
+                return $suratJalan->user->name;
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 }

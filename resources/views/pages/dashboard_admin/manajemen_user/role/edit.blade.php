@@ -7,7 +7,9 @@
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item">Manajemen User</li>
-    <li class="breadcrumb-item">Role</li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.role.index') }}" style="color: black;">Role</a>
+    </li>
     <li class="breadcrumb-item active">Edit Role</li>
 @endsection
 
@@ -39,8 +41,9 @@
                                         required>{{ $role->description }}</textarea>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+                                <a href="{{ route('dashboard.role.index') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </form>
                     </div>

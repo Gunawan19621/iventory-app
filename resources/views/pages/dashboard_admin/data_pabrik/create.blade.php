@@ -6,7 +6,9 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item">Pabrik</li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.pabrik.index') }}" style="color: black;">Pabrik</a>
+    </li>
     <li class="breadcrumb-item active">Tambah Pabrik</li>
 @endsection
 
@@ -32,8 +34,9 @@
                                         placeholder="Enter Nama Pabrik" required>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+                                <a href="{{ route('dashboard.pabrik.index') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </form>
                     </div>

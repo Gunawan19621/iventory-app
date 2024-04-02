@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/edit-password', [ProfileController::class, 'changePassword'])->name('profile.edit-password');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -94,9 +96,12 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         // Route::get('laporan-perhari/create', 'create')->name('laporan-perhari.create');
         // Route::post('laporan-perhari/store', 'store')->name('laporan-perhari.store');
         // Route::get('laporan-perhari/{id}', 'show')->name('laporan-perhari.show');
-        // Route::get('laporan-perhari/{id}/edit', 'edit')->name('laporan-perhari.edit');
+        Route::get('laporan-perhari/{id}/edit', 'edit')->name('laporan-perhari.edit');
         // Route::put('laporan-perhari/{id}', 'update')->name('laporan-perhari.update');
         // Route::delete('laporan-perhari/delete/{id}', 'destroy')->name('laporan-perhari.destroy');
+        Route::get('/laporan-perhari/data', 'data')->name('laporan-perhari.data');
+        Route::get('laporan-perhari/{id}', 'listBarang')->name('laporan-perhari.show'); // inihalaman list barang
+        Route::get('/laporan-perhari/list-barang/dataListBarang', 'dataListBarang')->name('list-barang.dataListBarang');
     });
 
     // Route Laporan Perbulan
@@ -108,9 +113,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         // Route::get('laporan-perbulan/{id}/edit', 'edit')->name('laporan-perbulan.edit');
         // Route::put('laporan-perbulan/{id}', 'update')->name('laporan-perbulan.update');
         // Route::delete('laporan-perbulan/delete/{id}', 'destroy')->name('laporan-perbulan.destroy');
+        Route::get('/laporan-perbulan/data', 'data')->name('laporan-perbulan.data');
     });
-
-    // Route::get('/laporan-perbulan', [LaporanPerbulanController::class, 'index'])->name('laporan-perbulan');
 });
 
 
